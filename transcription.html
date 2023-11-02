@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="balansys.css" />
+    <title>Balansys</title>
+    <script type="module">
+      //
+      //This is to help in communications with the server particularly my db
+      import * as server from "../schema/v/code/server.js";
+      //
+      //Formulate the query to collect the images from the db
+      const sql = "SELECT TO_BASE64(image) as data  FROM record;";
+      //
+      //Execute the query
+      const results = await server.exec(
+        "database",
+        ["balansys", false],
+        "get_sql_data",
+        [sql]
+      );
+      window.onload = () => {
+        //
+        //Get the image element from the document
+        const image = document.getElementById("recipt");
+        //
+        //Display the image collected from the db
+        image.src = `data:image/jpeg;base64,${results[0].data}`;
+      };
+    </script>
+  </head>
+  <body>
+    <div class="menu">
+      <h1>Balansys Transcription</h1>
+    </div>
+    <div class="view">
+      <div class="select">
+        <fieldset>
+          <legend>Select_file</legend>
+          <input type="radio" />from_folder
+          <br />
+          <button>choose_file</button>
+          <br />
+          <input type="radio" />from_database
+          <br />
+          <button>Select</button>
+        </fieldset>
+      </div>
+      <!-- rename the class to image from content-avoid confusion from content id and content class-->
+      <div class="image">
+        <!-- add the pic class -->
+        <img id="recipt" class="pic" alt="bmj" />
+      </div>
+    </div>
+    <div id="content">
+      <table>
+        <tr bgcolor="grey">
+          <th>Date</th>
+          <th>Invoice_No</th>
+          <th>Source</th>
+          <th>Item</th>
+          <th>Unit</th>
+          <th>Quantity</th>
+          <th>Amount</th>
+        </tr>
+        <tr bgcolor="lightgrey">
+          <td>19/10/2023</td>
+          <td>1948414</td>
+          <td>Destiny_Best_supermarket</td>
+          <td>Destiny_White_Bread</td>
+          <td>800g</td>
+          <td>1</td>
+          <td>110</td>
+        </tr>
+        <tr bgcolor="lightgrey">
+          <td>19/10/2023</td>
+          <td>1948414</td>
+          <td>Destiny_Best_supermarket</td>
+          <td>Bella_Jumbo_Roll</td>
+          <td>1</td>
+          <td>1</td>
+          <td>125</td>
+        </tr>
+        <tr bgcolor="lightgrey">
+          <td>19/10/2023</td>
+          <td>1948414</td>
+          <td>Destiny_Best_supermarket</td>
+          <td>Destiny_Brown_Bread</td>
+          <td>800g</td>
+          <td>1</td>
+          <td>110</td>
+        </tr>
+      </table>
+      <button>Add_Row</button>
+      <button>Edit</button>
+      <button>Save</button>
+      <button>Cancel</button>
+    </div>
+
+    <footer class="foot">
+      <p>Developed by Benard muli</p>
+    </footer>
+  </body>
+</html>
