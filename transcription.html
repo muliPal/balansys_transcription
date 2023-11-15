@@ -3,31 +3,8 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="balansys.css" />
+    <script src="balansys.js"></script>
     <title>Balansys</title>
-    <script type="module">
-      //
-      //This is to help in communications with the server particularly my db
-      import * as server from "../schema/v/code/server.js";
-      //
-      //Formulate the query to collect the images from the db
-      const sql = "SELECT TO_BASE64(image) as data  FROM record;";
-      //
-      //Execute the query
-      const results = await server.exec(
-        "database",
-        ["balansys", false],
-        "get_sql_data",
-        [sql]
-      );
-      window.onload = () => {
-        //
-        //Get the image element from the document
-        const image = document.getElementById("recipt");
-        //
-        //Display the image collected from the db
-        image.src = `data:image/jpeg;base64,${results[0].data}`;
-      };
-    </script>
   </head>
   <body>
     <div class="menu">
@@ -49,11 +26,11 @@
       <!-- rename the class to image from content-avoid confusion from content id and content class-->
       <div class="image">
         <!-- add the pic class -->
-        <img id="recipt" class="pic" alt="bmj" />
+        <img id="receipt" class="pic" alt="bmj" />
       </div>
     </div>
     <div id="content">
-      <table>
+      <table id="table_data">
         <tr bgcolor="grey">
           <th>Date</th>
           <th>Invoice_No</th>
@@ -91,14 +68,40 @@
           <td>110</td>
         </tr>
       </table>
-      <button>Add_Row</button>
-      <button>Edit</button>
-      <button>Save</button>
-      <button>Cancel</button>
+      <button id="add_new_button">Add_Row</button>
+      <button onclick="save_data()">Save</button>
     </div>
-
     <footer class="foot">
       <p>Developed by Benard muli</p>
     </footer>
+    <script>
+      // ------------------------------------------------------------------------
+      //                      Adding new row and saving data
+      // ------------------------------------------------------------------------
+      const balansys_table = document.getElementById("table_data");
+      const new_row_button = document.getElementById("add_new_button");
+      // 
+      // Adding new row to table
+      new_row_button.addEventListener('click', () => {
+          
+          // Create a new row template
+          const new_row = 
+              `
+                  <tr>
+                      <td><input type="text"></td>
+                      <td><input type="text"></td>
+                      <td><input type="text"></td>
+                      <td><input type="text"></td>
+                      <td><input type="text"></td>
+                      <td><input type="text"></td>
+                  </tr>
+              `;
+          
+          // 
+          // Add the tr fragment to the table.
+          balansys_table.innerHTML += new_row;
+          // console.log("This is working");
+      });
+    </script>
   </body>
 </html>
