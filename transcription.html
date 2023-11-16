@@ -30,42 +30,54 @@
     </div>
     <div id="content">
       <table id="table_data">
-        <tr bgcolor="grey">
-          <th>Date</th>
-          <th>Invoice_No</th>
-          <th>Source</th>
-          <th>Item</th>
-          <th>Unit</th>
-          <th>Quantity</th>
-          <th>Amount</th>
-        </tr>
-        <tr bgcolor="lightgrey">
-          <td>19/10/2023</td>
-          <td>1948414</td>
-          <td>Destiny_Best_supermarket</td>
-          <td>Destiny_White_Bread</td>
-          <td>800g</td>
-          <td>1</td>
-          <td>110</td>
-        </tr>
-        <tr bgcolor="lightgrey">
-          <td>19/10/2023</td>
-          <td>1948414</td>
-          <td>Destiny_Best_supermarket</td>
-          <td>Bella_Jumbo_Roll</td>
-          <td>1</td>
-          <td>1</td>
-          <td>125</td>
-        </tr>
-        <tr bgcolor="lightgrey">
-          <td>19/10/2023</td>
-          <td>1948414</td>
-          <td>Destiny_Best_supermarket</td>
-          <td>Destiny_Brown_Bread</td>
-          <td>800g</td>
-          <td>1</td>
-          <td>110</td>
-        </tr>
+        <tbody id="table_body">
+          <tr bgcolor="grey">
+            <th>Date</th>
+            <th>Invoice_No</th>
+            <th>Source</th>
+            <th>Item</th>
+            <th>Unit</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+          </tr>
+          <tr bgcolor="lightgrey">
+            <td>19/10/2023</td>
+            <td>1948414</td>
+            <td>Destiny_Best_supermarket</td>
+            <td>Destiny_White_Bread</td>
+            <td>800g</td>
+            <td>1</td>
+            <td>110</td>
+          </tr>
+          <tr bgcolor="lightgrey">
+            <td>19/10/2023</td>
+            <td>1948414</td>
+            <td>Destiny_Best_supermarket</td>
+            <td>Bella_Jumbo_Roll</td>
+            <td>1</td>
+            <td>1</td>
+            <td>125</td>
+          </tr>
+          <tr bgcolor="lightgrey">
+            <td>19/10/2023</td>
+            <td>1948414</td>
+            <td>Destiny_Best_supermarket</td>
+            <td>Destiny_Brown_Bread</td>
+            <td>800g</td>
+            <td>1</td>
+            <td>110</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr id="transcription_data">
+            <td><input type="text" class="input_data"></td>
+            <td><input type="text" class="input_data"></td>
+            <td><input type="text" class="input_data"></td>
+            <td><input type="text" class="input_data"></td>
+            <td><input type="text" class="input_data"></td>
+            <td><input type="text" class="input_data"></td>
+          </tr>
+        </tfoot>
       </table>
       <button id="add_new_button">Add_Row</button>
       <button onclick="save_data()">Save</button>
@@ -77,60 +89,61 @@
       // ------------------------------------------------------------------------
       //                      Adding new row and saving data
       // ------------------------------------------------------------------------
-      const balansys_table = document.getElementById("table_data");
-      const new_row_button = document.getElementById("add_new_button");
+      const balansys_table_body = document.getElementById("table_body");
+      // const new_row_button = document.getElementById("add_new_button");
       const data = [];
       //
       // Adding new row to table
-      new_row_button.addEventListener('click', () => {
-          // 
-          // Create a new row template
-          const new_row =
-              `
-                  <tr id="transcription_data">
-                      <td><input type="text"></td>
-                      <td><input type="text"></td>
-                      <td><input type="text"></td>
-                      <td><input type="text"></td>
-                      <td><input type="text"></td>
-                      <td><input type="text"></td>
-                  </tr>
-          `;
-          //
-          // Add the tr fragment to the table.
-          balansys_table.innerHTML += new_row;
-      });
+      // new_row_button.addEventListener('click', () => {
+      //     // 
+      //     // Create a new row template
+      //     const new_row =
+      //         `
+      //             <tr id="transcription_data">
+      //                 <td><input type="text"></td>
+      //                 <td><input type="text"></td>
+      //                 <td><input type="text"></td>
+      //                 <td><input type="text"></td>
+      //                 <td><input type="text"></td>
+      //                 <td><input type="text"></td>
+      //             </tr>
+      //     `;
+      //     //
+      //     // Add the tr fragment to the table.
+      //     balansys_table_body.innerHTML += new_row;
+      // });
       //
       // Save data from the input box then display on the table
       function save_data() {
-        const inputFields = document.getElementsByClassName('input-data');
-        const rowData = [];
-        //
+        const input_fields = document.getElementsByClassName("input_data");
+        const row_data = [];
+        
         // Get the data from the input boxes.
-        for (let i = 0; i < inputFields.length; i++) {
-            rowData.push(inputFields[i].value);
+        for (let i = 0; i < input_fields.length; i++) {
+            row_data.push(input_fields[i].value);
         }
-        //
-        // Display the data in the table.
-        data.push(rowData); // Store the data in the 'data' array
-        updateTable();
-      };
+        
+        // Store the data in the 'data' array
+        data.push(row_data);
+        console.log(row_data);
+        update_table();
+    }
 
-      function updateTable() {
-        // balansys_table.innerHTML = ''; // Clear the table
-
-        data.forEach(rowData => {
-            const newRow = document.createElement('tr');
-
-            rowData.forEach(value => {
-                const newCell = document.createElement('td');
-                newCell.textContent = value;
-                newRow.appendChild(newCell);
-            });
-
-            balansys_table.appendChild(newRow);
-        });
-      }
+    function update_table() {
+        data.forEach(row_data => {
+          const new_row = document.createElement('tr');
+        // 
+        // 
+          row_data.forEach(value => {
+              const new_cell = document.createElement('td');
+              new_cell.textContent = value;
+              new_row.appendChild(new_cell);
+          });
+          // 
+          // 
+          balansys_table_body.appendChild(new_row);
+      });
+    }
     </script>
   </body>
 </html>
