@@ -3,7 +3,6 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="balansys.css" />
-    <script src="balansys.js"></script>
     <title>Balansys</title>
   </head>
   <body>
@@ -26,7 +25,7 @@
       <!-- rename the class to image from content-avoid confusion from content id and content class-->
       <div class="image">
         <!-- add the pic class -->
-        <img id="receipt" class="pic" alt="bmj" />
+        <img id="receipt" class="pic" alt="bmj" src="./bmj.jpg"/>
       </div>
     </div>
     <div id="content">
@@ -80,14 +79,15 @@
       // ------------------------------------------------------------------------
       const balansys_table = document.getElementById("table_data");
       const new_row_button = document.getElementById("add_new_button");
-      // 
+      const data = [];
+      //
       // Adding new row to table
       new_row_button.addEventListener('click', () => {
-          
+          // 
           // Create a new row template
-          const new_row = 
+          const new_row =
               `
-                  <tr>
+                  <tr id="transcription_data">
                       <td><input type="text"></td>
                       <td><input type="text"></td>
                       <td><input type="text"></td>
@@ -95,13 +95,42 @@
                       <td><input type="text"></td>
                       <td><input type="text"></td>
                   </tr>
-              `;
-          
-          // 
+          `;
+          //
           // Add the tr fragment to the table.
           balansys_table.innerHTML += new_row;
-          // console.log("This is working");
       });
+      //
+      // Save data from the input box then display on the table
+      function save_data() {
+        const inputFields = document.getElementsByClassName('input-data');
+        const rowData = [];
+        //
+        // Get the data from the input boxes.
+        for (let i = 0; i < inputFields.length; i++) {
+            rowData.push(inputFields[i].value);
+        }
+        //
+        // Display the data in the table.
+        data.push(rowData); // Store the data in the 'data' array
+        updateTable();
+      };
+
+      function updateTable() {
+        // balansys_table.innerHTML = ''; // Clear the table
+
+        data.forEach(rowData => {
+            const newRow = document.createElement('tr');
+
+            rowData.forEach(value => {
+                const newCell = document.createElement('td');
+                newCell.textContent = value;
+                newRow.appendChild(newCell);
+            });
+
+            balansys_table.appendChild(newRow);
+        });
+      }
     </script>
   </body>
 </html>

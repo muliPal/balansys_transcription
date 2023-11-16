@@ -36,12 +36,10 @@ body {
     color: black;
 }
 .image{
-margin-left: 90px;
-margin-top: 30px;
+    border: 2px solid black;
 }
-.pic{
-    width:350px;
-    height:300px;
+img {
+    width: 100%;
 }
 
 .foot {
