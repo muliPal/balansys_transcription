@@ -1,48 +1,50 @@
 html {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 * {
-    margin: 0;
-    overflow: hidden;
+  margin: 0;
+  overflow: hidden;
 }
 
 body {
-    height: 100%;
-    display: grid;
-    grid-template-rows: 15% 80% 5%;
-    grid-template-columns: 50% 50%;
-    grid-template-areas:
-        "menu menu"
-        "view content"
-        "foot foot";
+  height: 100%;
+  display: grid;
+  grid-template-rows: 15% 80% 5%;
+  grid-template-columns: 50% 50%;
+  grid-template-areas:
+    "menu menu"
+    "view content"
+    "foot foot";
 }
 
 .menu {
-    grid-area: menu;
-    background: #1abc9c;
-    color: blue;
+  grid-area: menu;
+  background: #1abc9c;
+  color: blue;
 }
 
 .view {
-    grid-area: view;
-    background: beige;
-    overflow-y: scroll;
+  grid-area: view;
+  background: beige;
+  overflow-y: scroll;
 }
 
 #content {
-    grid-area: content;
-    color: black;
+  grid-area: content;
+  color: black;
 }
-.image{
-    border: 2px solid black;
+.image {
+  border: 2px solid black;
 }
 img {
-    width: 100%;
+    margin-left: -50%;
+  width: 200%;
+  mix-blend-mode:darken;
 }
 
 .foot {
-    grid-area: foot;
-    background: aqua;
+  grid-area: foot;
+  background: aqua;
 }
